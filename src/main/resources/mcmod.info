@@ -1,0 +1,11 @@
+[
+    {
+        "modid": "biocraft",
+        "name": "BioCraft",
+        "version": "0.0.1",
+		"mcversion": "1.12.2",
+        "authorList": ["JTGhawk137"],
+        "dependencies": [],
+        "description": "Biological Minecraft mod that allows players to progress through the game through technology while interacting with NPC's and Animals."
+    }
+]

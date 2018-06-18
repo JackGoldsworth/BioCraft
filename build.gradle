@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+group 'me.jtghawk137.biocraft'
+version '0.0.1'
+archivesBaseName = "tinkegration"
+sourceCompatibility = 1.8
+
+minecraft {
+    version = "1.12.2-14.23.1.2578"
+    runDir = "run"
+    mappings = "snapshot_20171003"
+    makeObfSourceJar = false
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "ilexiconn"
+        url = "https://maven.mcmoddev.com"
+    }
+}
+
+dependencies {
+    compile "net.ilexiconn:llibrary:1.7.9-1.12.2:dev"
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
