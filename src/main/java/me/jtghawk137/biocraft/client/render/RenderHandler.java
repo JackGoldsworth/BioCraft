@@ -1,7 +1,9 @@
 package me.jtghawk137.biocraft.client.render;
 
 import me.jtghawk137.biocraft.BioCraft;
-import me.jtghawk137.biocraft.server.item.ItemBase;
+import me.jtghawk137.biocraft.server.block.BaseBlock;
+import me.jtghawk137.biocraft.server.block.BlockHandler;
+import me.jtghawk137.biocraft.server.item.BaseItem;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -26,9 +28,13 @@ public enum RenderHandler
     @SubscribeEvent
     public static void onModelEvent(ModelRegistryEvent event)
     {
-        for (ItemBase item : ItemHandler.getItems())
+        for (BaseItem item : ItemHandler.getItems())
         {
             item.registerItemModel();
+        }
+        for (BaseBlock block : BlockHandler.getBlocks())
+        {
+            block.registerItemModel(Item.getItemFromBlock(block));
         }
     }
 

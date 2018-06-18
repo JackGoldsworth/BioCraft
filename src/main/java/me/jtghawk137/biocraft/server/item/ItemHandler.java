@@ -13,11 +13,11 @@ import java.util.List;
 public class ItemHandler
 {
 
-    public static final ItemBase COPPER_INGOT = new ItemBase("Copper Ingot", CreativeTabs.MATERIALS);
+    public static final BaseItem COPPER_INGOT = new BaseItem("Copper Ingot", CreativeTabs.MATERIALS);
 
-    private static List<ItemBase> items = new ArrayList<>();
+    private static List<BaseItem> items = new ArrayList<>();
 
-    public static void init()
+    public static void preInit()
     {
         items.add(COPPER_INGOT);
     }
@@ -25,13 +25,10 @@ public class ItemHandler
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
-        for (Item item : items)
-        {
-            event.getRegistry().register(item);
-        }
+        event.getRegistry().registerAll(items.toArray(new Item[items.size()]));
     }
 
-    public static List<ItemBase> getItems()
+    public static List<BaseItem> getItems()
     {
         return items;
     }
