@@ -1,7 +1,9 @@
 package me.jtghawk137.biocraft.server.event;
 
 import me.jtghawk137.biocraft.server.item.ItemHandler;
+import me.jtghawk137.biocraft.server.item.diving.BCDItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,9 +19,12 @@ public class ServerEventHandler
             if (event.getEntity() instanceof EntityPlayer)
             {
                 EntityPlayer player = (EntityPlayer) event.getEntity();
-                //TODO: Find better way to do this
-                if (player.inventory.armorItemInSlot(2).getUnlocalizedName().equals(ItemHandler.BCD_ITEM.getUnlocalizedName()))
-                    event.setCanceled(true);
+                if (player.inventory.armorItemInSlot(2).getItem() == ItemHandler.BCD_ITEM)
+                {
+                    ItemStack stack = player.inventory.armorItemInSlot(2);
+                    if (((BCDItem) stack.getItem()).getOxygen(stack) > 0)
+                        event.setCanceled(true);
+                }
             }
         }
     }
