@@ -1,6 +1,7 @@
 package me.jtghawk137.biocraft.server.block;
 
 import me.jtghawk137.biocraft.client.render.RenderHandler;
+import me.jtghawk137.biocraft.server.api.IContentRegistry;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -8,7 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public class BaseBlock extends Block
+public class BaseBlock extends Block implements IContentRegistry
 {
 
     protected String name;
@@ -24,13 +25,26 @@ public class BaseBlock extends Block
         setRegistryName(formattedName);
     }
 
-    public void registerItemModel(Item itemBlock)
-    {
-        RenderHandler.INSTANCE.registerItemRenderer(itemBlock, 0, formattedName);
-    }
-
     public Item createItemBlock()
     {
         return new ItemBlock(this).setRegistryName(getRegistryName());
+    }
+
+    @Override
+    public String getName()
+    {
+        return name;
+    }
+
+    @Override
+    public Class getContentClass()
+    {
+        return this.getClass();
+    }
+
+    @Override
+    public void registerModel()
+    {
+        RenderHandler.INSTANCE.registerItemRenderer(Item.getItemFromBlock(this), 0, formattedName);
     }
 }

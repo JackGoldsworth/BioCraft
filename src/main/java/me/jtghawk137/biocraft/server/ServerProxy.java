@@ -1,25 +1,30 @@
 package me.jtghawk137.biocraft.server;
 
 import me.jtghawk137.biocraft.server.block.BlockHandler;
+import me.jtghawk137.biocraft.server.event.ServerEventHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
+import me.jtghawk137.biocraft.server.recipe.SmeltingHandler;
+import me.jtghawk137.biocraft.server.world.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ServerProxy
 {
 
     public void onPreInit(FMLPreInitializationEvent event)
     {
-        ItemHandler.preInit();
-        BlockHandler.preInit();
-        MinecraftForge.EVENT_BUS.register(new ItemHandler());
-        MinecraftForge.EVENT_BUS.register(new BlockHandler());
+        ItemHandler.init();
+        BlockHandler.init();
+        MinecraftForge.EVENT_BUS.register(new ServerEventHandler());
+        GameRegistry.registerWorldGenerator(new WorldGenerator(), 3);
     }
 
     public void onInit(FMLInitializationEvent event)
     {
+        SmeltingHandler.init();
     }
 
     public void onPostInit(FMLPostInitializationEvent event)

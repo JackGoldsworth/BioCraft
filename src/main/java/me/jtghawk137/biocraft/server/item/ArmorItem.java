@@ -5,18 +5,20 @@ import me.jtghawk137.biocraft.client.render.RenderHandler;
 import me.jtghawk137.biocraft.server.api.IContentRegistry;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
 
-public class BaseItem extends Item implements IContentRegistry
+public class ArmorItem extends ItemArmor implements IContentRegistry
 {
 
     protected String name;
     protected String formattedName;
 
-    public BaseItem(String name)
+    public ArmorItem(ArmorMaterial materialIn, EntityEquipmentSlot equipmentSlotIn, String name)
     {
+        super(materialIn, 0, equipmentSlotIn);
         this.name = name;
-        this.setCreativeTab(CreativeTabs.MATERIALS);
+        this.setCreativeTab(CreativeTabs.COMBAT);
         formattedName = Utils.formatString(name);
         this.setUnlocalizedName(formattedName);
         this.setRegistryName(BioCraft.MODID, formattedName);

@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = BioCraft.MODID, name = BioCraft.NAME, version = BioCraft.VERSION)
 public class BioCraft
@@ -21,9 +22,12 @@ public class BioCraft
     @SidedProxy(serverSide = "me.jtghawk137.biocraft.server.ServerProxy", clientSide = "me.jtghawk137.biocraft.client.ClientProxy")
     public static ServerProxy proxy;
 
+    public static Logger logger;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        logger = event.getModLog();
         proxy.onPreInit(event);
         System.out.println(NAME + " is loading!");
     }
