@@ -1,125 +1,83 @@
 package me.jtghawk137.biocraft.server.block.entity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityLockable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class AirCompressorBlockEntity extends TileEntityLockable implements IInventory
-{
+import javax.annotation.Nullable;
+
+public class AirCompressorBlockEntity extends TileEntity {
+
+    private final ItemStackHandler inventory = new ItemStackHandler(2);
+
     @Override
-    public int getSizeInventory()
-    {
-        return 0;
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt);
+        int metadata = getBlockMetadata();
+        return new SPacketUpdateTileEntity(this.pos, metadata, nbt);
     }
 
     @Override
-    public boolean isEmpty()
-    {
-        return false;
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        this.readFromNBT(pkt.getNbtCompound());
     }
 
     @Override
-    public ItemStack getStackInSlot(int index)
-    {
-        return null;
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt);
+        return nbt;
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count)
-    {
-        return null;
+    public void handleUpdateTag(NBTTagCompound tag) {
+        this.readFromNBT(tag);
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index)
-    {
-        return null;
+    public NBTTagCompound getTileData() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt);
+        return nbt;
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack stack)
-    {
-
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound.setTag("Inventory", this.inventory.serializeNBT());
+        return super.writeToNBT(compound);
     }
 
     @Override
-    public int getInventoryStackLimit()
-    {
-        return 0;
+    public void readFromNBT(NBTTagCompound compound) {
+        this.inventory.deserializeNBT(compound.getCompoundTag("Inventory"));
+        super.readFromNBT(compound);
+    }
+
+    public ItemStackHandler getInventory() {
+        return inventory;
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer player)
-    {
-        return false;
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return true;
+        }
+        return super.hasCapability(capability, facing);
     }
 
+    @Nullable
     @Override
-    public void openInventory(EntityPlayer player)
-    {
-
-    }
-
-    @Override
-    public void closeInventory(EntityPlayer player)
-    {
-
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack)
-    {
-        return false;
-    }
-
-    @Override
-    public int getField(int id)
-    {
-        return 0;
-    }
-
-    @Override
-    public void setField(int id, int value)
-    {
-
-    }
-
-    @Override
-    public int getFieldCount()
-    {
-        return 0;
-    }
-
-    @Override
-    public void clear()
-    {
-
-    }
-
-    @Override
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
-    {
-        return null;
-    }
-
-    @Override
-    public String getGuiID()
-    {
-        return null;
-    }
-
-    @Override
-    public String getName()
-    {
-        return null;
-    }
-
-    @Override
-    public boolean hasCustomName()
-    {
-        return false;
+    @SuppressWarnings("unchecked")
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return (T) this.inventory;
+        }
+        return super.getCapability(capability, facing);
     }
 }

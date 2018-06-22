@@ -1,5 +1,7 @@
 package me.jtghawk137.biocraft.server.block;
 
+import me.jtghawk137.biocraft.BioCraft;
+import me.jtghawk137.biocraft.server.block.entity.AirCompressorBlockEntity;
 import me.jtghawk137.biocraft.server.block.machine.AirCompressorBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -7,6 +9,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,8 @@ public class BlockHandler
         blocks.add(SILVER_ORE);
         blocks.add(PLATINUM_ORE);
         blocks.add(AIR_COMPRESSOR);
+
+        GameRegistry.registerTileEntity(AirCompressorBlockEntity.class, BioCraft.MODID + ":aircompressor");
     }
 
     @SubscribeEvent

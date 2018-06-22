@@ -11,11 +11,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class AirCompressorBlock extends OrientedBlock implements IContentRegistry
 {
@@ -29,8 +32,7 @@ public class AirCompressorBlock extends OrientedBlock implements IContentRegistr
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (!worldIn.isRemote)
-        {
+        if (!worldIn.isRemote) {
             playerIn.openGui(BioCraft.instance, GuiHandler.GUI_AIR_COMPRESSOR, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
@@ -39,8 +41,14 @@ public class AirCompressorBlock extends OrientedBlock implements IContentRegistr
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
     {
-        AirCompressorBlockEntity entity = (AirCompressorBlockEntity) worldIn.getTileEntity(pos);
-        InventoryHelper.dropInventoryItems(worldIn, pos, entity);
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+        if(tileEntity instanceof AirCompressorBlockEntity) {
+            IItemHandler item = ((AirCompressorBlockEntity)tileEntity).getInventory();
+            for (int i = 0; i < item.getSlots(); i++) {
+                ItemStack stack = item.getStackInSlot(i);
+                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+            }
+        }
         super.breakBlock(worldIn, pos, state);
     }
 
