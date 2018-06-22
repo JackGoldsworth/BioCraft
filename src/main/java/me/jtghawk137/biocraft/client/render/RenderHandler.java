@@ -4,6 +4,7 @@ import me.jtghawk137.biocraft.BioCraft;
 import me.jtghawk137.biocraft.server.api.IContentRegistry;
 import me.jtghawk137.biocraft.server.block.BlockHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -27,13 +28,21 @@ public enum RenderHandler
     @SubscribeEvent
     public static void onModelEvent(ModelRegistryEvent event)
     {
-        for (IContentRegistry item : ItemHandler.getItems())
+        for (Item item : ItemHandler.getItems())
         {
-            item.registerModel();
+            if (item instanceof IContentRegistry)
+            {
+                IContentRegistry contentItem = (IContentRegistry) item;
+                contentItem.registerModel();
+            }
         }
-        for (IContentRegistry block : BlockHandler.getBlocks())
+        for (Block block : BlockHandler.getBlocks())
         {
-            block.registerModel();
+            if (block instanceof IContentRegistry)
+            {
+                IContentRegistry contentBlock = (IContentRegistry) block;
+                contentBlock.registerModel();
+            }
         }
     }
 

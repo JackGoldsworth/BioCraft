@@ -3,13 +3,11 @@ package me.jtghawk137.biocraft.server.block.entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityLockable;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 
-public class AirCompressorBlockEntity extends TileEntityLockable implements ITickable, ISidedInventory
+public class AirCompressorBlockEntity extends TileEntityLockable implements IInventory
 {
     @Override
     public int getSizeInventory()
@@ -123,29 +121,5 @@ public class AirCompressorBlockEntity extends TileEntityLockable implements ITic
     public boolean hasCustomName()
     {
         return false;
-    }
-
-    @Override
-    public int[] getSlotsForFace(EnumFacing side)
-    {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, EnumFacing direction)
-    {
-        return false;
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction)
-    {
-        return false;
-    }
-
-    @Override
-    public void update()
-    {
-
     }
 }

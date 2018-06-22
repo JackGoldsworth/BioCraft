@@ -1,5 +1,6 @@
 package me.jtghawk137.biocraft.client;
 
+import me.jtghawk137.biocraft.client.event.ClientEventHandler;
 import me.jtghawk137.biocraft.client.render.RenderHandler;
 import me.jtghawk137.biocraft.server.ServerProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,6 +18,7 @@ public class ClientProxy extends ServerProxy
     public void onPreInit(FMLPreInitializationEvent event)
     {
         super.onPreInit(event);
+        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         MinecraftForge.EVENT_BUS.register(RenderHandler.INSTANCE);
     }
 

@@ -1,6 +1,5 @@
 package me.jtghawk137.biocraft.server.item;
 
-import me.jtghawk137.biocraft.server.api.IContentRegistry;
 import me.jtghawk137.biocraft.server.item.diving.BCDItem;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -25,7 +24,7 @@ public class ItemHandler
     public static final BaseItem PLATINUM_INGOT = new BaseItem("Platinum Ingot");
     public static final ArmorItem BCD_ITEM = new BCDItem(ItemArmor.ArmorMaterial.LEATHER, EntityEquipmentSlot.CHEST, "bcd");
 
-    private static List<IContentRegistry> items = new ArrayList<>();
+    private static List<Item> items = new ArrayList<>();
 
     public static void init()
     {
@@ -43,10 +42,9 @@ public class ItemHandler
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         event.getRegistry().registerAll(items.toArray(new Item[items.size()]));
-        event.getRegistry().register(BCD_ITEM);
     }
 
-    public static List<IContentRegistry> getItems()
+    public static List<Item> getItems()
     {
         return items;
     }

@@ -1,20 +1,47 @@
 package me.jtghawk137.biocraft.server.block.machine;
 
+import me.jtghawk137.biocraft.BioCraft;
+import me.jtghawk137.biocraft.client.gui.GuiHandler;
+import me.jtghawk137.biocraft.client.render.RenderHandler;
 import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.block.OrientedBlock;
 import me.jtghawk137.biocraft.server.block.entity.AirCompressorBlockEntity;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AirCompressorBlock extends BlockContainer implements IContentRegistry
+public class AirCompressorBlock extends OrientedBlock implements IContentRegistry
 {
 
-    private String name;
-
-    protected AirCompressorBlock(Material materialIn)
+    public AirCompressorBlock(String name)
     {
-        super(materialIn);
+        super(name, Material.ANVIL);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+        if (!worldIn.isRemote)
+        {
+            playerIn.openGui(BioCraft.instance, GuiHandler.GUI_AIR_COMPRESSOR, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        }
+        return true;
+    }
+
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    {
+        AirCompressorBlockEntity entity = (AirCompressorBlockEntity) worldIn.getTileEntity(pos);
+        InventoryHelper.dropInventoryItems(worldIn, pos, entity);
+        super.breakBlock(worldIn, pos, state);
     }
 
     @Override
@@ -38,6 +65,6 @@ public class AirCompressorBlock extends BlockContainer implements IContentRegist
     @Override
     public void registerModel()
     {
-
+        RenderHandler.INSTANCE.registerItemRenderer(Item.getItemFromBlock(this), 0, formattedName);
     }
 }

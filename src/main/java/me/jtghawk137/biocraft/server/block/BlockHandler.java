@@ -1,7 +1,9 @@
 package me.jtghawk137.biocraft.server.block;
 
+import me.jtghawk137.biocraft.server.block.machine.AirCompressorBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -20,9 +22,10 @@ public class BlockHandler
     public static final OreBlock ALUMINIUM_ORE = new OreBlock("Aluminium Ore");
     public static final OreBlock SILVER_ORE = new OreBlock("Silver Ore");
     public static final OreBlock PLATINUM_ORE = new OreBlock("Platinum Ore");
+    public static final AirCompressorBlock AIR_COMPRESSOR = new AirCompressorBlock("Air Compressor");
 
 
-    private static List<BaseBlock> blocks = new ArrayList<>();
+    private static List<Block> blocks = new ArrayList<>();
 
     public static void init()
     {
@@ -33,6 +36,7 @@ public class BlockHandler
         blocks.add(ALUMINIUM_ORE);
         blocks.add(SILVER_ORE);
         blocks.add(PLATINUM_ORE);
+        blocks.add(AIR_COMPRESSOR);
     }
 
     @SubscribeEvent
@@ -44,13 +48,13 @@ public class BlockHandler
     @SubscribeEvent
     public static void registerItemBlocks(RegistryEvent.Register<Item> event)
     {
-        for (BaseBlock block : blocks)
+        for (Block block : blocks)
         {
-            event.getRegistry().register(block.createItemBlock());
+            event.getRegistry().register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
         }
     }
 
-    public static List<BaseBlock> getBlocks()
+    public static List<Block> getBlocks()
     {
         return blocks;
     }

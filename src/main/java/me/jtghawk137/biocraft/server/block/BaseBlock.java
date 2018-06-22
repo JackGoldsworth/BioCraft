@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 
 public class BaseBlock extends Block implements IContentRegistry
 {
@@ -23,11 +22,6 @@ public class BaseBlock extends Block implements IContentRegistry
         formattedName = Utils.formatString(name);
         setUnlocalizedName(formattedName);
         setRegistryName(formattedName);
-    }
-
-    public Item createItemBlock()
-    {
-        return new ItemBlock(this).setRegistryName(getRegistryName());
     }
 
     @Override

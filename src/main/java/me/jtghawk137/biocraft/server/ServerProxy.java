@@ -1,5 +1,7 @@
 package me.jtghawk137.biocraft.server;
 
+import me.jtghawk137.biocraft.BioCraft;
+import me.jtghawk137.biocraft.client.gui.GuiHandler;
 import me.jtghawk137.biocraft.server.block.BlockHandler;
 import me.jtghawk137.biocraft.server.event.ServerEventHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
@@ -9,6 +11,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ServerProxy
@@ -19,7 +22,8 @@ public class ServerProxy
         ItemHandler.init();
         BlockHandler.init();
         MinecraftForge.EVENT_BUS.register(new ServerEventHandler());
-        GameRegistry.registerWorldGenerator(new WorldGenerator(), 3);
+        GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
+        NetworkRegistry.INSTANCE.registerGuiHandler(BioCraft.instance, new GuiHandler());
     }
 
     public void onInit(FMLInitializationEvent event)
