@@ -8,6 +8,7 @@ import me.jtghawk137.biocraft.server.block.OrientedBlock;
 import me.jtghawk137.biocraft.server.block.entity.AirCompressorBlockEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -18,7 +19,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class AirCompressorBlock extends OrientedBlock implements IContentRegistry
 {
@@ -26,6 +26,7 @@ public class AirCompressorBlock extends OrientedBlock implements IContentRegistr
     public AirCompressorBlock(String name)
     {
         super(name, Material.ANVIL);
+        this.setCreativeTab(CreativeTabs.MATERIALS);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 

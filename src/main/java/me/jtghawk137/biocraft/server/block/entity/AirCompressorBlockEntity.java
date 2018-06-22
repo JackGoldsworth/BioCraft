@@ -1,19 +1,24 @@
 package me.jtghawk137.biocraft.server.block.entity;
 
+import me.jtghawk137.biocraft.server.api.ICompressibleItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class AirCompressorBlockEntity extends TileEntity {
+public class AirCompressorBlockEntity extends TileEntity implements ITickable
+{
 
     private final ItemStackHandler inventory = new ItemStackHandler(2);
+    private int currentTime;
 
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
@@ -50,12 +55,14 @@ public class AirCompressorBlockEntity extends TileEntity {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("Inventory", this.inventory.serializeNBT());
+        compound.setInteger("CurrentTime", this.currentTime);
         return super.writeToNBT(compound);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         this.inventory.deserializeNBT(compound.getCompoundTag("Inventory"));
+        this.currentTime = compound.getInteger("CurrentTime");
         super.readFromNBT(compound);
     }
 
@@ -79,5 +86,24 @@ public class AirCompressorBlockEntity extends TileEntity {
             return (T) this.inventory;
         }
         return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public void update()
+    {
+        ItemStack stack = this.inventory.getStackInSlot(0);
+        if (stack.getItem() instanceof ICompressibleItem && ((ICompressibleItem) stack.getItem()).isCompressible(stack))
+        {
+            if (currentTime++ == 100)
+            {
+                this.inventory.setStackInSlot(1, ((ICompressibleItem) stack.getItem()).getCompressedOutput(stack));
+            }
+        } else
+            currentTime = 0;
+    }
+
+    public int getCurrentTime()
+    {
+        return currentTime;
     }
 }

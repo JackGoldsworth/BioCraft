@@ -40,14 +40,13 @@ public class BlockHandler
         blocks.add(SILVER_ORE);
         blocks.add(PLATINUM_ORE);
         blocks.add(AIR_COMPRESSOR);
-
-        GameRegistry.registerTileEntity(AirCompressorBlockEntity.class, BioCraft.MODID + ":aircompressor");
     }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
         event.getRegistry().registerAll(blocks.toArray(new Block[blocks.size()]));
+        GameRegistry.registerTileEntity(AirCompressorBlockEntity.class, BioCraft.MODID + ":aircompressor");
     }
 
     @SubscribeEvent

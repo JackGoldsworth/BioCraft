@@ -22,7 +22,7 @@ public class ServerEventHandler
                 if (player.inventory.armorItemInSlot(2).getItem() == ItemHandler.BCD_ITEM)
                 {
                     ItemStack stack = player.inventory.armorItemInSlot(2);
-                    if (((BCDItem) stack.getItem()).getOxygen(stack) > 0)
+                    if (((BCDItem) stack.getItem()).getAir(stack) > 0)
                         event.setCanceled(true);
                 }
             }
