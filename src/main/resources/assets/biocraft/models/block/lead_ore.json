@@ -1,0 +1,6 @@
+{
+  "parent": "biocraft:block/ore_overlay_bass",
+  "textures": {
+    "overlay": "biocraft:blocks/lead_ore"
+  }
+}
