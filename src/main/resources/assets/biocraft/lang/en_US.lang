@@ -1,8 +1,37 @@
 #When 1.13 comes out use https://github.com/ichttt/MCLang2Json
 
-#Items
+#Items-----------------------------------
+
+#Ores
 item.copper_ingot.name=Copper Ingot
+item.nickel_ingot.name=Nickel Ingot
+item.lead_ingot.name=Lead Ingot
+item.tin_ingot.name=Tin Ingot
+item.aluminium_ingot.name=Aluminium Ingot
+item.silver_ingot.name=Silver Ingot
+item.platinum_ingot.name=Platinum Ingot
+
+#Armor
 item.bcd.name=Buoyancy Control Device
 
-#Blocks
+#Blocks-----------------------------------
+
+#Ores
 tile.copper_ore.name=Copper Ore
+tile.nickel_ore.name=Nickel Ore
+tile.lead_ore.name=Lead Ore
+tile.tin_ore.name=Tin Ore
+tile.aluminium_ore.name=Aluminium Ore
+tile.silver_ore.name=Silver Ore
+tile.platinum_ore.name=Platinum Ore
+
+#Machines
+tile.air_compressor.name=Air Compressor
+
+#Containers--------------------------------
+container.air_compressor=Air Compressor
+
+#Creative Tabs-----------------------------
+itemGroup.biocraft.machines=BioCraft Machines
+itemGroup.biocraft.items=BioCraft Items
+itemGroup.biocraft.blocks=BioCraft Blocks

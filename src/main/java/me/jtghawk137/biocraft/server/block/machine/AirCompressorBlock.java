@@ -6,9 +6,9 @@ import me.jtghawk137.biocraft.client.render.RenderHandler;
 import me.jtghawk137.biocraft.server.api.IContentRegistry;
 import me.jtghawk137.biocraft.server.block.OrientedBlock;
 import me.jtghawk137.biocraft.server.block.entity.AirCompressorBlockEntity;
+import me.jtghawk137.biocraft.server.tab.TabHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -26,7 +26,7 @@ public class AirCompressorBlock extends OrientedBlock implements IContentRegistr
     public AirCompressorBlock(String name)
     {
         super(name, Material.ANVIL);
-        this.setCreativeTab(CreativeTabs.MATERIALS);
+        this.setCreativeTab(TabHandler.MACHINES);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 

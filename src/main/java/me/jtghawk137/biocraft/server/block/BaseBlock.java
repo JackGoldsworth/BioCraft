@@ -2,10 +2,10 @@ package me.jtghawk137.biocraft.server.block;
 
 import me.jtghawk137.biocraft.client.render.RenderHandler;
 import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.tab.TabHandler;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class BaseBlock extends Block implements IContentRegistry
@@ -18,7 +18,7 @@ public class BaseBlock extends Block implements IContentRegistry
     {
         super(material);
         this.name = name;
-        this.setCreativeTab(CreativeTabs.MATERIALS);
+        this.setCreativeTab(TabHandler.BLOCKS);
         formattedName = Utils.formatString(name);
         setUnlocalizedName(formattedName);
         setRegistryName(formattedName);

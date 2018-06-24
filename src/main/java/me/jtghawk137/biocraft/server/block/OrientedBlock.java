@@ -1,6 +1,7 @@
 package me.jtghawk137.biocraft.server.block;
 
 import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.tab.TabHandler;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -27,6 +28,7 @@ public abstract class OrientedBlock extends BlockContainer implements IContentRe
         super(material);
         formattedName = Utils.formatString(name);
         this.name = name;
+        this.setCreativeTab(TabHandler.BLOCKS);
         this.setRegistryName(formattedName);
         this.setUnlocalizedName(formattedName);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
