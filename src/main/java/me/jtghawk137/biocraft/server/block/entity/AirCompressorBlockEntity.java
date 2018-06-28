@@ -1,6 +1,6 @@
 package me.jtghawk137.biocraft.server.block.entity;
 
-import me.jtghawk137.biocraft.server.api.ICompressibleItem;
+import me.jtghawk137.biocraft.server.api.CompressibleItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -92,11 +92,11 @@ public class AirCompressorBlockEntity extends TileEntity implements ITickable
     public void update()
     {
         ItemStack stack = this.inventory.getStackInSlot(0);
-        if (stack.getItem() instanceof ICompressibleItem && ((ICompressibleItem) stack.getItem()).isCompressible(stack))
+        if (stack.getItem() instanceof CompressibleItem && ((CompressibleItem) stack.getItem()).isCompressible(stack))
         {
             if (currentTime++ == 100)
             {
-                this.inventory.setStackInSlot(1, ((ICompressibleItem) stack.getItem()).getCompressedOutput(stack));
+                this.inventory.setStackInSlot(1, ((CompressibleItem) stack.getItem()).getCompressedOutput(stack));
             }
         } else
             currentTime = 0;

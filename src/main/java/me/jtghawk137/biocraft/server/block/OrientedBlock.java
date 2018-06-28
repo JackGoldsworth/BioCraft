@@ -1,6 +1,6 @@
 package me.jtghawk137.biocraft.server.block;
 
-import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.tab.TabHandler;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.block.BlockContainer;
@@ -15,7 +15,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class OrientedBlock extends BlockContainer implements IContentRegistry
+public abstract class OrientedBlock extends BlockContainer implements ContentRegistry
 {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -120,11 +120,5 @@ public abstract class OrientedBlock extends BlockContainer implements IContentRe
     public String getName()
     {
         return name;
-    }
-
-    @Override
-    public Class getContentClass()
-    {
-        return this.getClass();
     }
 }

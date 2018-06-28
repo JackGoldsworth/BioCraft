@@ -1,14 +1,14 @@
 package me.jtghawk137.biocraft.server.block;
 
 import me.jtghawk137.biocraft.client.render.RenderHandler;
-import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.tab.TabHandler;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 
-public class BaseBlock extends Block implements IContentRegistry
+public class BaseBlock extends Block implements ContentRegistry
 {
 
     protected String name;
@@ -28,12 +28,6 @@ public class BaseBlock extends Block implements IContentRegistry
     public String getName()
     {
         return name;
-    }
-
-    @Override
-    public Class getContentClass()
-    {
-        return this.getClass();
     }
 
     @Override

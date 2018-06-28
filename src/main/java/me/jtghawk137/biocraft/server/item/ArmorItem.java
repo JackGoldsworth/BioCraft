@@ -2,13 +2,13 @@ package me.jtghawk137.biocraft.server.item;
 
 import me.jtghawk137.biocraft.BioCraft;
 import me.jtghawk137.biocraft.client.render.RenderHandler;
-import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.tab.TabHandler;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 
-public class ArmorItem extends ItemArmor implements IContentRegistry
+public class ArmorItem extends ItemArmor implements ContentRegistry
 {
 
     protected String name;
@@ -30,11 +30,6 @@ public class ArmorItem extends ItemArmor implements IContentRegistry
         return name;
     }
 
-    @Override
-    public Class getContentClass()
-    {
-        return this.getClass();
-    }
 
     @Override
     public void registerModel()

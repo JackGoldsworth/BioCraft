@@ -2,12 +2,12 @@ package me.jtghawk137.biocraft.server.item;
 
 import me.jtghawk137.biocraft.BioCraft;
 import me.jtghawk137.biocraft.client.render.RenderHandler;
-import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.tab.TabHandler;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.minecraft.item.Item;
 
-public class BaseItem extends Item implements IContentRegistry
+public class BaseItem extends Item implements ContentRegistry
 {
 
     protected String name;
@@ -26,12 +26,6 @@ public class BaseItem extends Item implements IContentRegistry
     public String getName()
     {
         return name;
-    }
-
-    @Override
-    public Class getContentClass()
-    {
-        return this.getClass();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package me.jtghawk137.biocraft.server.item.diving;
 
-import me.jtghawk137.biocraft.server.api.ICompressibleItem;
+import me.jtghawk137.biocraft.server.api.CompressibleItem;
 import me.jtghawk137.biocraft.server.item.ArmorItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BCDItem extends ArmorItem implements ICompressibleItem
+public class BCDItem extends ArmorItem implements CompressibleItem
 {
     public BCDItem(ArmorMaterial materialIn, EntityEquipmentSlot equipmentSlotIn, String name)
     {

@@ -1,7 +1,7 @@
 package me.jtghawk137.biocraft.client.render;
 
 import me.jtghawk137.biocraft.BioCraft;
-import me.jtghawk137.biocraft.server.api.IContentRegistry;
+import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.block.BlockHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
 import net.minecraft.block.Block;
@@ -30,17 +30,17 @@ public enum RenderHandler
     {
         for (Item item : ItemHandler.getItems())
         {
-            if (item instanceof IContentRegistry)
+            if (item instanceof ContentRegistry)
             {
-                IContentRegistry contentItem = (IContentRegistry) item;
+                ContentRegistry contentItem = (ContentRegistry) item;
                 contentItem.registerModel();
             }
         }
         for (Block block : BlockHandler.getBlocks())
         {
-            if (block instanceof IContentRegistry)
+            if (block instanceof ContentRegistry)
             {
-                IContentRegistry contentBlock = (IContentRegistry) block;
+                ContentRegistry contentBlock = (ContentRegistry) block;
                 contentBlock.registerModel();
             }
         }

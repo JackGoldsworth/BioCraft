@@ -1,10 +1,8 @@
 package me.jtghawk137.biocraft.server.api;
 
-public interface IContentRegistry
+public interface ContentRegistry
 {
     String getName();
-
-    Class getContentClass();
 
     void registerModel();
 }
