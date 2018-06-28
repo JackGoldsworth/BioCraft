@@ -1,5 +1,6 @@
 package me.jtghawk137.biocraft.server.entity.ai;
 
+import me.jtghawk137.biocraft.server.entity.ai.base.AIType;
 import me.jtghawk137.biocraft.server.entity.ai.base.AdvancedAIBase;
 import net.minecraft.entity.EntityCreature;
 
@@ -7,23 +8,23 @@ public class HerdingAI extends AdvancedAIBase
 {
     public HerdingAI(EntityCreature entity)
     {
-        super(entity, (byte) 1);
+        super(entity, AIType.MOVEMENT, 2);
     }
 
     @Override
-    public boolean shouldExcecute()
+    public boolean shouldExecute()
     {
         return false;
     }
 
     @Override
-    public void excecute()
+    public void execute()
     {
 
     }
 
     @Override
-    public boolean continueExcecute()
+    public boolean shouldContinue()
     {
         return false;
     }

@@ -10,27 +10,67 @@ public class AdvancedAIManager
 {
 
     private EntityCreature entity;
-    private AdvancedAIBase currentAI;
-    private List<AdvancedAIBase> ai = new ArrayList<>();
+    private List<AdvancedAIBase> currentAI;
+    private List<AdvancedAIBase> aiList;
 
     public AdvancedAIManager(EntityCreature entity)
     {
+        currentAI = new ArrayList<>();
+        aiList = new ArrayList<>();
         this.entity = entity;
+    }
+
+    public void update()
+    {
+        if (entity.ticksExisted % 20 == 0)
+        {
+            for (AdvancedAIBase ai : aiList)
+            {
+                if (ai.shouldExecute())
+                {
+                    if (!currentAI.isEmpty() && isConcurrent(ai, currentAI.get(0)))
+                    {
+                        ai.execute();
+                        addCurrentAI(ai);
+                        continue;
+                    }
+                    ai.execute();
+                    addCurrentAI(ai);
+                }
+            }
+            for (AdvancedAIBase currentAI : currentAI)
+            {
+                if (currentAI.isFinished())
+                {
+                    if (currentAI.shouldContinue())
+                    {
+                        currentAI.execute();
+                        continue;
+                    }
+                    this.currentAI.remove(currentAI);
+                }
+            }
+        }
+    }
+
+    public boolean isConcurrent(AdvancedAIBase task1, AdvancedAIBase task2)
+    {
+        return task1.getMutex() == task2.getMutex();
     }
 
     public void addAI(AdvancedAIBase ai)
     {
-        this.ai.add(ai);
+        this.aiList.add(ai);
     }
 
     public void removeAI(AdvancedAIBase ai)
     {
-        this.ai.remove(ai);
+        this.aiList.remove(ai);
     }
 
     public void sortAI()
     {
-        ai.sort(Comparator.comparing(AdvancedAIBase::getImportance).reversed());
+        aiList.sort(Comparator.comparing(AdvancedAIBase::getImportance).reversed());
     }
 
     public EntityCreature getEntity()
@@ -38,13 +78,13 @@ public class AdvancedAIManager
         return entity;
     }
 
-    public AdvancedAIBase getCurrentAI()
+    public List<AdvancedAIBase> getCurrentAI()
     {
         return currentAI;
     }
 
-    public void setCurrentAI(AdvancedAIBase currentAI)
+    public void addCurrentAI(AdvancedAIBase newAI)
     {
-        this.currentAI = currentAI;
+        currentAI.add(newAI);
     }
 }

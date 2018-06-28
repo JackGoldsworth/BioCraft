@@ -1,5 +1,6 @@
 package me.jtghawk137.biocraft.server.entity.ai.base;
 
+import me.jtghawk137.biocraft.server.entity.AnimalEntity;
 import me.jtghawk137.biocraft.server.util.MathUtils;
 import net.minecraft.entity.EntityCreature;
 
@@ -10,19 +11,25 @@ public abstract class AdvancedAIBase
     private boolean isFinished;
     private float importanceWeight;
     private AIType type;
-    private byte mutex;
+    private int mutex;
 
-    public AdvancedAIBase(EntityCreature entity, byte mutex)
+    public AdvancedAIBase(EntityCreature entity)
+    {
+        this(entity, AIType.MOVEMENT, 1);
+    }
+
+    public AdvancedAIBase(EntityCreature entity, AIType type, int mutex)
     {
         this.entity = entity;
         this.mutex = mutex;
+        this.type = type;
     }
 
-    public abstract boolean shouldExcecute();
+    public abstract boolean shouldExecute();
 
-    public abstract void excecute();
+    public abstract void execute();
 
-    public abstract boolean continueExcecute();
+    public abstract boolean shouldContinue();
 
     public float getImportance()
     {
@@ -47,9 +54,10 @@ public abstract class AdvancedAIBase
     public void setFinished(boolean finished)
     {
         isFinished = finished;
-        /*
-         * entity.getAIManager().sort;
-         */
+        if (entity instanceof AnimalEntity)
+        {
+            ((AnimalEntity) entity).getAIManager().sortAI();
+        }
     }
 
     public EntityCreature getEntity()
@@ -65,5 +73,15 @@ public abstract class AdvancedAIBase
     public AIType getType()
     {
         return type;
+    }
+
+    public int getMutex()
+    {
+        return mutex;
+    }
+
+    public void setMutex(int mutex)
+    {
+        this.mutex = mutex;
     }
 }

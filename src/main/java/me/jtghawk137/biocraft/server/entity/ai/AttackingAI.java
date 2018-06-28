@@ -1,5 +1,6 @@
 package me.jtghawk137.biocraft.server.entity.ai;
 
+import me.jtghawk137.biocraft.server.entity.ai.base.AIType;
 import me.jtghawk137.biocraft.server.entity.ai.base.AdvancedAIBase;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -12,24 +13,24 @@ public class AttackingAI extends AdvancedAIBase
 
     public AttackingAI(EntityCreature entity)
     {
-        super(entity, (byte) 1);
+        super(entity, AIType.ATTACK, 1);
         this.entity = entity;
     }
 
     @Override
-    public boolean shouldExcecute()
+    public boolean shouldExecute()
     {
         return false;
     }
 
     @Override
-    public void excecute()
+    public void execute()
     {
 
     }
 
     @Override
-    public boolean continueExcecute()
+    public boolean shouldContinue()
     {
         return false;
     }
