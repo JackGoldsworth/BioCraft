@@ -22,35 +22,7 @@ public class AdvancedAIManager
 
     public void update()
     {
-        if (entity.ticksExisted % 20 == 0)
-        {
-            for (AdvancedAIBase ai : aiList)
-            {
-                if (ai.shouldExecute())
-                {
-                    if (!currentAI.isEmpty() && isConcurrent(ai, currentAI.get(0)))
-                    {
-                        ai.execute();
-                        addCurrentAI(ai);
-                        continue;
-                    }
-                    ai.execute();
-                    addCurrentAI(ai);
-                }
-            }
-            for (AdvancedAIBase currentAI : currentAI)
-            {
-                if (currentAI.isFinished())
-                {
-                    if (currentAI.shouldContinue())
-                    {
-                        currentAI.execute();
-                        continue;
-                    }
-                    this.currentAI.remove(currentAI);
-                }
-            }
-        }
+        //TODO: REDO
     }
 
     public boolean isConcurrent(AdvancedAIBase task1, AdvancedAIBase task2)

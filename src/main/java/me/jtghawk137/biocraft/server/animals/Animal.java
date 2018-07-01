@@ -1,10 +1,11 @@
 package me.jtghawk137.biocraft.server.animals;
 
 import me.jtghawk137.biocraft.BioCraft;
+import me.jtghawk137.biocraft.server.api.ContentRegistry;
+import me.jtghawk137.biocraft.server.entity.AnimalEntity;
 import me.jtghawk137.biocraft.server.util.Utils;
 import net.ilexiconn.llibrary.client.model.tabula.TabulaModelHandler;
 import net.ilexiconn.llibrary.client.model.tabula.container.TabulaModelContainer;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 
@@ -14,10 +15,10 @@ import java.util.Map;
 /**
  * This class is supposed to be an info class for each Animal
  */
-public class Animal
+public abstract class Animal implements ContentRegistry
 {
 
-    private Class<? extends EntityAnimal> entityClass;
+    private Class<? extends AnimalEntity> entityClass;
     private String name;
     private int age;
     private int maxAge;
@@ -54,12 +55,12 @@ public class Animal
         return name;
     }
 
-    public void setEntityClass(Class<? extends EntityAnimal> entityClass)
+    public void setEntityClass(Class<? extends AnimalEntity> entityClass)
     {
         this.entityClass = entityClass;
     }
 
-    public Class<? extends EntityAnimal> getEntityClass()
+    public Class<? extends AnimalEntity> getEntityClass()
     {
         return entityClass;
     }

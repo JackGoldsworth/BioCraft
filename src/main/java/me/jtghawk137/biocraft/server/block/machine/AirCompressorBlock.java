@@ -3,7 +3,6 @@ package me.jtghawk137.biocraft.server.block.machine;
 import me.jtghawk137.biocraft.BioCraft;
 import me.jtghawk137.biocraft.client.gui.GuiHandler;
 import me.jtghawk137.biocraft.client.render.RenderHandler;
-import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.block.OrientedBlock;
 import me.jtghawk137.biocraft.server.block.entity.AirCompressorBlockEntity;
 import me.jtghawk137.biocraft.server.tab.TabHandler;
@@ -20,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
-public class AirCompressorBlock extends OrientedBlock implements ContentRegistry
+public class AirCompressorBlock extends OrientedBlock
 {
 
     public AirCompressorBlock(String name)

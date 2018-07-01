@@ -1,7 +1,6 @@
 package me.jtghawk137.biocraft;
 
 import me.jtghawk137.biocraft.server.ServerProxy;
-import me.jtghawk137.biocraft.server.util.MathUtils;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,7 +27,6 @@ public class BioCraft
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        System.out.println(MathUtils.sigmoid(1 * 3.15f));
         logger = event.getModLog();
         proxy.onPreInit(event);
         System.out.println(NAME + " is loading!");

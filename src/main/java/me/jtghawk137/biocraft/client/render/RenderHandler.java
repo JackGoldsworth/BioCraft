@@ -1,8 +1,10 @@
 package me.jtghawk137.biocraft.client.render;
 
 import me.jtghawk137.biocraft.BioCraft;
+import me.jtghawk137.biocraft.server.animals.Animal;
 import me.jtghawk137.biocraft.server.api.ContentRegistry;
 import me.jtghawk137.biocraft.server.block.BlockHandler;
+import me.jtghawk137.biocraft.server.entity.EntityHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -42,6 +44,13 @@ public enum RenderHandler
             {
                 ContentRegistry contentBlock = (ContentRegistry) block;
                 contentBlock.registerModel();
+            }
+        }
+        for (Animal animal : EntityHandler.getAnimals())
+        {
+            if (animal instanceof ContentRegistry)
+            {
+                animal.registerModel();
             }
         }
     }

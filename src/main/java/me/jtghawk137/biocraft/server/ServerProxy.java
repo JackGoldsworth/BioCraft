@@ -3,6 +3,7 @@ package me.jtghawk137.biocraft.server;
 import me.jtghawk137.biocraft.BioCraft;
 import me.jtghawk137.biocraft.client.gui.GuiHandler;
 import me.jtghawk137.biocraft.server.block.BlockHandler;
+import me.jtghawk137.biocraft.server.entity.EntityHandler;
 import me.jtghawk137.biocraft.server.event.ServerEventHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
 import me.jtghawk137.biocraft.server.recipe.SmeltingHandler;
@@ -21,6 +22,7 @@ public class ServerProxy
     {
         ItemHandler.init();
         BlockHandler.init();
+        EntityHandler.init();
         MinecraftForge.EVENT_BUS.register(new ServerEventHandler());
         GameRegistry.registerWorldGenerator(new WorldGenerator(), 0);
         NetworkRegistry.INSTANCE.registerGuiHandler(BioCraft.instance, new GuiHandler());
