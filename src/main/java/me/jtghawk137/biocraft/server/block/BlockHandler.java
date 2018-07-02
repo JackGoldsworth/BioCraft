@@ -31,7 +31,7 @@ public class BlockHandler
 
 
     private static List<Block> blocks = new ArrayList<>();
-    private static Map<UUID, SecurityCameraBlockEntity> cameras = new HashMap<>();
+    private static Map<UUID, List<SecurityCameraBlockEntity>> cameras = new HashMap<>();
 
     public static void init()
     {
@@ -73,18 +73,30 @@ public class BlockHandler
         return blocks;
     }
 
-    public static Map<UUID, SecurityCameraBlockEntity> getCameras()
+    public static Map<UUID, List<SecurityCameraBlockEntity>> getCameras()
     {
         return cameras;
     }
 
-    public static void addCamera(UUID uuid, SecurityCameraBlockEntity camera)
+    public static List<SecurityCameraBlockEntity> getCamerasForUUID(UUID uuid)
     {
-        cameras.put(uuid, camera);
+        return cameras.get(uuid) != null ? cameras.get(uuid) : cameras.put(uuid, new ArrayList<>());
     }
 
-    public static void removeCamera(UUID uuid)
+    public static void addCamera(UUID uuid, SecurityCameraBlockEntity camera)
     {
-        cameras.remove(uuid);
+        if (cameras.get(uuid) != null)
+        {
+            cameras.get(uuid).add(camera);
+        } else
+        {
+            cameras.put(uuid, new ArrayList<>());
+            cameras.get(uuid).add(camera);
+        }
+    }
+
+    public static void removeCamera(UUID uuid, SecurityCameraBlockEntity camera)
+    {
+        cameras.get(uuid).remove(camera);
     }
 }

@@ -12,6 +12,7 @@ public class GuiHandler implements IGuiHandler
 {
 
     public static final int GUI_AIR_COMPRESSOR = 0;
+    public static final int GUI_SECURITY_CAMERA = 1;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) //Return container

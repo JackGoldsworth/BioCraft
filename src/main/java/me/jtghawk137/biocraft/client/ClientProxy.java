@@ -1,8 +1,11 @@
 package me.jtghawk137.biocraft.client;
 
 import me.jtghawk137.biocraft.client.event.ClientEventHandler;
+import me.jtghawk137.biocraft.client.gui.SecurityCameraGui;
 import me.jtghawk137.biocraft.client.render.RenderHandler;
 import me.jtghawk137.biocraft.server.ServerProxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -33,5 +36,11 @@ public class ClientProxy extends ServerProxy
     public void onPostInit(FMLPostInitializationEvent event)
     {
         super.onPostInit(event);
+    }
+
+    @Override
+    public void openCamera(EntityPlayer player)
+    {
+        Minecraft.getMinecraft().displayGuiScreen(new SecurityCameraGui(player));
     }
 }

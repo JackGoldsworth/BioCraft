@@ -59,12 +59,6 @@ public class AirCompressorBlock extends OrientedBlock
     }
 
     @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    @Override
     public void registerModel()
     {
         RenderHandler.INSTANCE.registerItemRenderer(Item.getItemFromBlock(this), 0, formattedName);

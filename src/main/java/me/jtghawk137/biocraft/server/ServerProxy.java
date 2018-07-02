@@ -8,6 +8,7 @@ import me.jtghawk137.biocraft.server.event.ServerEventHandler;
 import me.jtghawk137.biocraft.server.item.ItemHandler;
 import me.jtghawk137.biocraft.server.recipe.SmeltingHandler;
 import me.jtghawk137.biocraft.server.world.WorldGenerator;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -34,6 +35,11 @@ public class ServerProxy
     }
 
     public void onPostInit(FMLPostInitializationEvent event)
+    {
+
+    }
+
+    public void openCamera(EntityPlayer player)
     {
 
     }
