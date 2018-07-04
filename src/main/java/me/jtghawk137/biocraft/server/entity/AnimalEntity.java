@@ -16,14 +16,13 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     public AnimalEntity(World worldIn)
     {
         super(worldIn);
-        aiManager = new AdvancedAIManager(this);
+        aiManager = new AdvancedAIManager();
     }
 
     @Override
     public void onUpdate()
     {
         super.onUpdate();
-        aiManager.update();
     }
 
     public AdvancedAIManager getAIManager()
